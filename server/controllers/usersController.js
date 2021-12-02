@@ -74,8 +74,8 @@ login: function (req,res) {
         res.status(200).json(userInfo);
         })
         .catch( error => {
-            response.statusMessage = error.message;
-            response.status(406).end()
+            res.statusMessage = error.message;
+            res.status(406).end()
         }); 
     })
     .catch( error => {

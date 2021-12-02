@@ -12,4 +12,7 @@ export class UserService {
     return this._http.post("http://localhost:8080/users/register",newUser)
   }
   
+  login(user:any){
+    return this._http.post("http://localhost:8080/users/login",user)
+  }
 }

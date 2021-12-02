@@ -18,14 +18,18 @@ export class RegisterComponent implements OnInit {
 
   confpassword:any = ""
 
-//!Validations side-------------------------------------------------------------------------
+//*Validations side-------------------------------------------------------------------------
   isValid:Boolean = true;
 
   errors:any = {
     firstnamelen : "",
     lastnamelen : "",
+    passlen : "",
+    confpassmjs : "",
+    emailexits: "",
+    empty: ""
   }
-//!Validations side-------------------------------------------------------------------------
+//*Validations side-------------------------------------------------------------------------
 
 
   constructor(private _HttpService: UserService) { }
@@ -35,39 +39,60 @@ export class RegisterComponent implements OnInit {
 
   register(event:any):void{
 
-//?Validations side-------------------------------------------------------------------------
+//!Validations side-------------------------------------------------------------------------
+
+this.isValid = true;
 
   this.errors = {
     firstnamelen : "",
     lastnamelen : "",
+    passlen : "",
+    confpassmjs : "",
+    emailexits: "",
+    empty: ""
+  }
+
+  if(this.newUser.firstname.length == 0 || 
+  this.newUser.lastname.length == 0 ||
+  this.newUser.email.length == 0 ||
+  this.newUser.password.length == 0){
+    this.isValid = false;
+    this.errors.empty = "You leaved an empty space"
   }
 
   if(this.newUser.firstname.length < 3){
     this.isValid = false;
-    this.errors.firstnamelen = "You need at least 3 characters"
+    this.errors.firstnamelen = "You need at least 3 characters for firstname"
   }
+
   if(this.newUser.lastname.length < 3){
     this.isValid = false;
-    this.errors.lastnamelen = "You need at least 3 characters"
+    this.errors.lastnamelen = "You need at least 3 characters for lastname"
   }
 
-//?Validations side-------------------------------------------------------------------------
+  if(this.newUser.password.length < 8){
+    this.isValid = false;
+    this.errors.passlen = "You need at least 8 characters for password"
+  }
+  if(this.newUser.password !== this.confpassword){
+    this.isValid = false;
+    this.errors.confpassmjs = "The passwords does not match"
+  }
 
+//!Validations side-------------------------------------------------------------------------end
 
     if(this.isValid){
-      if(this.newUser.password === this.confpassword){
         this._HttpService.createNewUser(this.newUser)
         .subscribe((data:any)=>{
-          console.log(data);
+          this.errors.empty = "User Created "
+        },
+        (error:any) =>{
+          console.log(error);
+          this.errors.emailexits = "This email is already in use"
         })
-      }
-      else{
-        console.log("mamaste");
-        this.confpassword = 12345
-      }
     }
     else{
-      console.log("Cagaste");
+      console.log("Ups");
       
     }
   }

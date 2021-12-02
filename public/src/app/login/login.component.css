@@ -50,3 +50,7 @@
     h1{
         margin-bottom: 0;
     }
+
+    .errors{
+        color: rgb(218, 27, 27);
+        }

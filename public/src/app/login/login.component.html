@@ -1,5 +1,5 @@
 
-<form>
+<form (submit)="loginProcess($event)">
 
     <h1>Login as..</h1>
 
@@ -16,6 +16,8 @@
                 Password:
             </label>
             <input type="text" [(ngModel)]="loginInfo.password" name="password"/>
+            <div class="errors">{{errors.empty}}</div>
+            <div class="errors">{{errors.others}}</div>
         </div>
         
         <div>
