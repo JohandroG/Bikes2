@@ -1,0 +1,13 @@
+
+
+
+use('bikes');
+// use 'bikes';
+
+// db.createCollection('users')
+// db.createCollection('bikes')
+
+
+// this shouldn't be nessesary because when you start the server it creates the collections, just creating
+// the DB is more than enought, but I include the collections just in case.
+

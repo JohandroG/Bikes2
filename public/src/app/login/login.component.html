@@ -1,0 +1,28 @@
+
+<form>
+
+    <h1>Login as..</h1>
+
+    <h4 class="name">{{loginInfo.email}}</h4>
+    <div class="form">
+        <div>
+            <label for="email">
+                Email:
+            </label>
+            <input type="text" [(ngModel)]="loginInfo.email" name="email"/>
+        </div>
+        <div>
+            <label for="password">
+                Password:
+            </label>
+            <input type="text" [(ngModel)]="loginInfo.password" name="password"/>
+        </div>
+        
+        <div>
+            <button class="btt" type="submit">
+                Login
+            </button>
+        </div>
+    </div>
+
+</form>
