@@ -32,7 +32,9 @@ export class RegisterComponent implements OnInit {
 //*Validations side-------------------------------------------------------------------------
 
 
-  constructor(private _HttpService: UserService) { }
+  constructor(private _HttpService: UserService,
+              private _router:Router,
+              private _route:ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -84,7 +86,12 @@ this.isValid = true;
     if(this.isValid){
         this._HttpService.createNewUser(this.newUser)
         .subscribe((data:any)=>{
-          this.errors.empty = "User Created "
+
+          sessionStorage.setItem('userID', data._id); //! Session In
+          sessionStorage.setItem('userFirstname', data.firstname); //! Session In
+          sessionStorage.setItem('userLastname', data.lastname); //! Session In
+          sessionStorage.setItem('userEmail', data.email); //! Session In
+          this._router.navigate( ['/home'] );
         },
         (error:any) =>{
           console.log(error);

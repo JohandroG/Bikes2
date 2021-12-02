@@ -26,12 +26,16 @@ errors:any = {
 //*Validations side-------------------------------------------------------------------------
 
 
-  constructor(private _HttpService: UserService) { }
+  constructor(private _HttpService: UserService,
+              private _router:Router,
+              private _route:ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
   loginProcess(event:any):void{
+
+    this.isValid = true;
 
 //!Validations side-------------------------------------------------------------------------
 this.isValid = true;
@@ -55,6 +59,12 @@ if(this.loginInfo.email.length == 0 ||
       this._HttpService.login(this.loginInfo)
     .subscribe((data:any) =>{
       console.log("success");
+      
+      sessionStorage.setItem('userID', data._id); //! Session In
+      sessionStorage.setItem('userFirstname', data.firstname); //! Session In
+      sessionStorage.setItem('userLastname', data.lastname); //! Session In
+      sessionStorage.setItem('userEmail', data.email); //! Session In
+      this._router.navigate( ['/home'] );
     },
     (error:any)=>{
       this.errors.others = error.statusText

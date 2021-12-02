@@ -27,13 +27,14 @@ createNewUser: function ( req, res) {
             .createUser(newUser)
             .then(data =>{
                 userInfo = {
+                    _id: data._id,
                     firstname : data.firstname,
                     lastname : data.lastname,
                     email : data.email
                 }
 
-                req.session.userInfo = userInfo
-                res.status(200).json(data);
+                
+                res.status(200).json(userInfo);
                 //TODO: REVISAR SI ESTO DEBE IR EN SESION O QUE-----------------------------------------
             })
             .catch(err=>{
@@ -65,12 +66,13 @@ login: function (req,res) {
             }
 
             userInfo = {
+            _id: data._id,
             firstname : data.firstname,
             lastname : data.lastname,
             email : data.email
             }
 
-        req.session.userInfo = userInfo
+        
         res.status(200).json(userInfo);
         })
         .catch( error => {

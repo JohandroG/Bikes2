@@ -5,20 +5,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserMComponent } from './user-m/user-m.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {path: '', 
   component: UserMComponent,
   },
-
-  // { path: '', 
-  // component: RegisterComponent,
-  // outlet:'reg' },
-
-  // { path: '', 
-  // component: LoginComponent,  
-  // outlet:'log'},
-
+  {path: 'home', 
+  component: HomeComponent,
+  },
 //!Save Route
   {
     path: '**',
